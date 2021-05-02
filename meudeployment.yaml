@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meudeployment
+# especifica o ReplicaSet
+spec:
+  replicas: 10 # quantidade de pods
+  selector: 
+    matchLabels: # irá selecionar os containers que são iguais ao label indicado
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    # especifica a config dos containers nos pods
+    spec:
+      containers:
+        - name: site
+          image: kubedevio/nginx-color:green
+          ports:
+            - containerPort: 80
